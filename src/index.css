@@ -1,1 +1,20 @@
 @import "tailwindcss";
+/* styles.css */
+
+/* styles.css */
+select option {
+    color: #000000; /* Warna teks default */
+    background-color: #ffffff; /* Warna latar belakang default */
+  }
+  
+  /* Ubah warna teks dan latar belakang saat dipilih (aktif) */
+  select option:checked {
+    color: #ffffff; /* Warna teks saat dipilih */
+    background-color: #43507B; /* Warna latar belakang saat dipilih */
+  }
+  
+  /* Ubah warna teks dan latar belakang saat fokus */
+  select:focus option:checked {
+    color: #ffffff;
+    background-color: #43507B;
+  }
