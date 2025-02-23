@@ -5,25 +5,36 @@ const ConverterApp = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [mode, setMode] = useState("decimal");
+  const [error, setError] = useState("");
 
-    // Fungsi untuk mengonversi desimal ke biner
-    const decimalToBinary = (num) => {
-      if (isNaN(num) || num < 0) return "Invalid input"; // Validasi input
-      return (parseInt(num, 10) >>> 0).toString(2); // Konversi desimal ke biner
-    };
-  
-    // Fungsi untuk mengonversi biner ke desimal
-    const binaryToDecimal = (bin) => {
-      if (!/^[01]+$/.test(bin)) return "Invalid input"; // Validasi input
-      return parseInt(bin, 2); // Konversi biner ke desimal
-    };
-  
-      // Fungsi untuk menangani konversi berdasarkan mode yang dipilih
+  // Fungsi untuk mengonversi desimal ke biner
+  const decimalToBinary = (num) => {
+    return (parseInt(num, 10) >>> 0).toString(2); // Konversi desimal ke biner
+  };
+
+  // Fungsi untuk mengonversi biner ke desimal
+  const binaryToDecimal = (bin) => {
+    return parseInt(bin, 2); // Konversi biner ke desimal
+  };
+
+  // Fungsi untuk menangani konversi berdasarkan mode yang dipilih
   const handleConvert = () => {
     if (mode === "decimal") {
-      setResult(decimalToBinary(input)); // Konversi desimal ke biner
+      if (isNaN(input) || input < 0) {
+        setError("Input salah, harus memasukkan bilangan desimal non-negatif.");
+        setResult("");
+      } else {
+        setError("");
+        setResult(decimalToBinary(input)); // Konversi desimal ke biner
+      }
     } else {
-      setResult(binaryToDecimal(input)); // Konversi biner ke desimal
+      if (!/^[01]+$/.test(input)) {
+        setError("Input salah, harus memasukkan bilangan biner (0 atau 1).");
+        setResult("");
+      } else {
+        setError("");
+        setResult(binaryToDecimal(input)); // Konversi biner ke desimal
+      }
     }
   };
 
@@ -52,6 +63,7 @@ const ConverterApp = () => {
             onChange={(e) => setInput(e.target.value)}
             placeholder={mode === "decimal" ? "Enter decimal" : "Enter binary"}
           />
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
         <button
           className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
