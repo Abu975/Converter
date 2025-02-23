@@ -47,7 +47,7 @@ const ConverterApp = () => {
         <div className="flex items-center justify-center">
           <div className="w-100 md:w-75 h-[350px] md:h-100 flex items-end">
             <img
-              src="./public/bgmath.jpg"
+              src="/bgmath.jpg"
               alt="Illustrasi"
               className="object-cover object-bottom md:object-center w-100 h-[350px] md:w-75 md:h-100"
             />
